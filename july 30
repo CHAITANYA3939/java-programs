@@ -1,0 +1,158 @@
+1 ) import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter the size of the array:");
+        int n = scanner.nextInt();
+        int[] array = new int[n];
+
+        System.out.println("Enter " + n + " numbers:");
+        for (int i = 0; i < n; i++) {
+            array[i] = scanner.nextInt();
+        }
+
+        try {
+            int sum = findSum(array, n);
+            System.out.println("Sum of " + n + " numbers is: " + sum);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("ArrayIndexOutOfBoundsException caught: " + e.getMessage());
+        }
+    }
+
+    public static int findSum(int[] array, int n) {
+        int sum = 0;
+        for (int i = 0; i <= n; i++) { 
+            sum += array[i];
+        }
+        return sum;
+    }
+}
+
+2 ) class PrimeChecker implements Runnable {
+    private int number;
+
+    public PrimeChecker(int number) {
+        this.number = number;
+    }
+
+    @Override
+    public void run() {
+        if (isPrime(number)) {
+            System.out.println(number + " is a prime number");
+        } else {
+            System.out.println(number + " is not a prime number");
+        }
+    }
+
+    private boolean isPrime(int number) {
+        if (number <= 1) {
+            return false;
+        }
+        for (int i = 2; i <= Math.sqrt(number); i++) {
+            if (number % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int[] numbers = {23, 34, 11, 48, 67};
+
+        for (int number : numbers) {
+            PrimeChecker primeChecker = new PrimeChecker(number);
+            Thread thread = new Thread(primeChecker);
+            thread.start();
+        }
+    }
+} 
+out put : 34 is not a prime number
+23 is a prime number
+11 is a prime number
+67 is a prime number
+
+3 ) public class ExceptionHandling {
+    public static void main(String[] args) {
+        try {
+            int[] array = new int[5];
+            array[10] = 10;
+
+            int a = 10;
+            int b = 0;
+            int result = a / b; 
+
+            String str = null;
+            System.out.println(str.length()); 
+        } catch (ArrayIndexOutOfBoundsException | ArithmeticException | NullPointerException e) {
+            System.out.println("Caught exception: " + e.getMessage());
+        }
+    }
+}
+out put : Caught exception: Index 10 out of bounds for length 5
+
+=== Code Execution Successful ===
+
+4 ) public class Box {
+    private double length;
+    private double width;
+    private double height;
+
+    public Box() {
+        this.length = 1.0;
+        this.width = 1.0;
+        this.height = 1.0;
+    }
+
+    public double calculateVolume() {
+        return length * width * height;
+    }
+
+    public static void main(String[] args) {
+        Box box = new Box();
+        double volume = box.calculateVolume();
+        System.out.println("The volume of the box is: " + volume);
+    }
+}
+out put :The volume of the box is: 1.0
+
+5 ) class Fibonacci implements Runnable {
+    private int n;
+
+    public Fibonacci(int n) {
+        this.n = n;
+    }
+
+    @Override
+    public void run() {
+        System.out.println("Fibonacci series up to " + n + ":");
+        for (int i = 0; i <= n; i++) {
+            System.out.print(fibonacci(i) + " ");
+        }
+        System.out.println();
+    }
+
+    private int fibonacci(int n) {
+        if (n <= 1) {
+            return n;
+        } else {
+            return fibonacci(n - 1) + fibonacci(n - 2);
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        int n = 10; // Generate Fibonacci series up to n
+
+        
+        Thread thread = new Thread(new Fibonacci(n));
+
+        thread.start();
+    }
+}
+out put : Fibonacci series up to 10:
+0 1 1 2 3 5 8 13 21 34 55 
+
+=== Code Execution Successful ===
